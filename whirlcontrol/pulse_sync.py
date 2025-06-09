@@ -4,7 +4,7 @@ Simulates weekly pulse survey interactions.
 """
 
 from datetime import datetime
-from typing import Dict
+from typing import Dict, Iterable
 
 
 def record_pulse_response(whirl_list, email: str) -> None:
@@ -28,3 +28,16 @@ def process_weekly_pulse(whirl_list) -> Dict[str, str]:
             delta_weeks = (datetime.utcnow() - last_seen).days // 7
             statuses[member.email] = "low_engaged" if delta_weeks >= PULSE_SKIP_THRESHOLD else "active"
     return statuses
+
+
+def send_pulse_emails(members: Iterable[str]) -> None:
+    """Placeholder for sending pulse survey emails."""
+    for email in members:
+        print(f"Sending pulse survey to {email}")
+
+
+def weekly_pulse_cycle(whirl_list) -> Dict[str, str]:
+    """Run the full weekly pulse process and return statuses."""
+    emails = [member.email for member in whirl_list.members if "pulse_active" in member.tags]
+    send_pulse_emails(emails)
+    return process_weekly_pulse(whirl_list)

@@ -28,3 +28,9 @@ def get_court_grid() -> Dict[str, CourtStatus]:
         "C": CourtStatus.OPEN,
         "D": CourtStatus.SOFT_RSVP,
     }
+
+
+def update_court_status(grid: Dict[str, CourtStatus], court: str, status: CourtStatus) -> None:
+    """Update the status of a court label in the provided grid."""
+    if court in grid:
+        grid[court] = status

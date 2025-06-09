@@ -21,3 +21,6 @@ class RecJamFeed:
 
     def list_items(self) -> List[RecJamItem]:
         return self.items
+
+    def remove_item(self, title: str) -> None:
+        self.items = [item for item in self.items if item.title != title]

@@ -1,7 +1,8 @@
 # WhirlControl
 
 Minimal prototype implementing modules described in the build spec.
-This version provides Python stubs representing core functionality.
+This version provides Python stubs representing core functionality. Modules can
+be wired together in simple scripts to simulate RSVP and survey workflows.
 
 ## Modules
 - `court_signal` – static representation of court status
@@ -11,4 +12,10 @@ This version provides Python stubs representing core functionality.
 - `popup_rsvp` – basic RSVP webhook handler
 - `recjam_feed` – simple read-only feed model
 
-Example scripts live in the `scripts/` folder.
+Scripts showcase:
+
+- `rsvp_handler.py` – simulates a Tally webhook storing RSVP info
+- `pulse_reminder.py` – demonstrates a weekly pulse cycle with status output
+
+Example scripts live in the `scripts/` folder. Run them with `PYTHONPATH=. python
+scripts/<name>.py` to see sample output.
