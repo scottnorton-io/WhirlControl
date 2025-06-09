@@ -46,3 +46,37 @@ class WhirlList:
 
     def remove_member(self, email: str) -> None:
         self.members = [m for m in self.members if m.email != email]
+
+    # New helper methods for basic CRM manipulation
+
+    def remove_tag(self, email: str, tag: str) -> None:
+        """Remove a tag from a member if present."""
+        member = self.find_member(email)
+        if member and tag in member.tags:
+            member.tags.remove(tag)
+
+    def list_by_tag(self, tag: str) -> List[Member]:
+        """Return members who have the specified tag."""
+        return [m for m in self.members if tag in m.tags]
+
+    def to_json(self) -> str:
+        """Serialize members to JSON string."""
+        import json
+
+        def member_to_dict(m: Member) -> dict:
+            return {"name": m.name, "email": m.email, "tags": list(m.tags)}
+
+        return json.dumps([member_to_dict(m) for m in self.members])
+
+    @classmethod
+    def from_json(cls, data: str) -> "WhirlList":
+        """Create a WhirlList instance from JSON string."""
+        import json
+
+        obj = cls()
+        try:
+            for entry in json.loads(data):
+                obj.add_member(entry.get("name", ""), entry.get("email", ""), entry.get("tags", []))
+        except Exception:
+            pass
+        return obj

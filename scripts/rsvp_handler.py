@@ -17,5 +17,6 @@ if __name__ == "__main__":
         "name": "Sample User",
         "zip": "85001",
         "court": "A",
+        "tier": "founder",
     }
     handle_rsvp_webhook(sample_payload)

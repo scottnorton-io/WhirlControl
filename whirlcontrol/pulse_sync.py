@@ -26,7 +26,10 @@ def process_weekly_pulse(whirl_list) -> Dict[str, str]:
             statuses[member.email] = "unknown"
         else:
             delta_weeks = (datetime.utcnow() - last_seen).days // 7
-            statuses[member.email] = "low_engaged" if delta_weeks >= PULSE_SKIP_THRESHOLD else "active"
+            if delta_weeks >= PULSE_SKIP_THRESHOLD:
+                statuses[member.email] = "low_engaged"
+            else:
+                statuses[member.email] = "active"
     return statuses
 
 
@@ -40,4 +43,10 @@ def weekly_pulse_cycle(whirl_list) -> Dict[str, str]:
     """Run the full weekly pulse process and return statuses."""
     emails = [member.email for member in whirl_list.members if "pulse_active" in member.tags]
     send_pulse_emails(emails)
-    return process_weekly_pulse(whirl_list)
+    statuses = process_weekly_pulse(whirl_list)
+    for email, status in statuses.items():
+        if status == "low_engaged":
+            whirl_list.add_tag(email, "low_engaged")
+        else:
+            whirl_list.remove_tag(email, "low_engaged")
+    return statuses
