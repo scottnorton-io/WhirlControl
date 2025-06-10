@@ -26,3 +26,10 @@ def get_airtable_record(email: str) -> Optional[Dict[str, str]]:
 def list_airtable_records() -> List[Dict[str, str]]:
     """Return all stored records."""
     return list(_AIRTABLE_DB.values())
+
+
+def delete_airtable_record(email: str) -> None:
+    """Remove a record from the in-memory table if it exists."""
+    if email in _AIRTABLE_DB:
+        del _AIRTABLE_DB[email]
+        print(f"[airtable] delete record for {email}")

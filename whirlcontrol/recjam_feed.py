@@ -24,3 +24,24 @@ class RecJamFeed:
 
     def remove_item(self, title: str) -> None:
         self.items = [item for item in self.items if item.title != title]
+
+    def to_json(self) -> str:
+        """Serialize feed items to JSON string."""
+        import json
+
+        return json.dumps(
+            [{"title": item.title, "link": item.link} for item in self.items]
+        )
+
+    @classmethod
+    def from_json(cls, data: str) -> "RecJamFeed":
+        """Create a RecJamFeed from JSON string."""
+        import json
+
+        obj = cls()
+        try:
+            for entry in json.loads(data):
+                obj.add_item(entry.get("title", ""), entry.get("link", ""))
+        except Exception:
+            pass
+        return obj

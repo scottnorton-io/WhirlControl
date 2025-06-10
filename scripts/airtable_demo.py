@@ -17,6 +17,12 @@ def run():
     for r in airtable_utils.list_airtable_records():
         print(r)
 
+    # demonstrate deleting a record
+    airtable_utils.delete_airtable_record("demo@example.com")
+    print("After delete:")
+    for r in airtable_utils.list_airtable_records():
+        print(r)
+
 
 if __name__ == "__main__":
     run()

@@ -36,6 +36,14 @@ class SpinBoard:
         lines = [f"- **{m.title}**: {m.description}" for m in self.moments]
         return "\n".join(lines)
 
+    def to_json(self) -> str:
+        """Serialize moments to a JSON string."""
+        import json
+
+        return json.dumps(
+            [{"title": m.title, "description": m.description} for m in self.moments]
+        )
+
     @classmethod
     def from_markdown(cls, data: str) -> "SpinBoard":
         """Create a SpinBoard from a Markdown bullet list."""
@@ -49,4 +57,17 @@ class SpinBoard:
                 title_part, desc = content[2:].split("**:", 1)
                 title = title_part.strip()
                 obj.add_moment(title, desc.strip())
+        return obj
+
+    @classmethod
+    def from_json(cls, data: str) -> "SpinBoard":
+        """Create a SpinBoard from a JSON list structure."""
+        import json
+
+        obj = cls()
+        try:
+            for entry in json.loads(data):
+                obj.add_moment(entry.get("title", ""), entry.get("description", ""))
+        except Exception:
+            pass
         return obj
