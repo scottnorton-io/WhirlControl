@@ -30,3 +30,23 @@ class SpinBoard:
 
     def remove_moment(self, title: str) -> None:
         self.moments = [m for m in self.moments if m.title != title]
+
+    def to_markdown(self) -> str:
+        """Return the moments formatted as a Markdown list."""
+        lines = [f"- **{m.title}**: {m.description}" for m in self.moments]
+        return "\n".join(lines)
+
+    @classmethod
+    def from_markdown(cls, data: str) -> "SpinBoard":
+        """Create a SpinBoard from a Markdown bullet list."""
+        obj = cls()
+        for line in data.splitlines():
+            line = line.strip()
+            if not line.startswith("- "):
+                continue
+            content = line[2:]
+            if content.startswith("**") and "**:" in content:
+                title_part, desc = content[2:].split("**:", 1)
+                title = title_part.strip()
+                obj.add_moment(title, desc.strip())
+        return obj

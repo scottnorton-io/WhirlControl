@@ -13,12 +13,15 @@ be wired together in simple scripts to simulate RSVP and survey workflows.
 - `recjam_feed` – simple read-only feed model
 - `email_utils` – placeholder Mailchimp actions
 - `airtable_utils` – stub functions to mimic Airtable sync
+  now stores records in memory for demos
 
 ## Recent additions
 - `WhirlList` now supports JSON and CSV import/export plus tag filtering.
 - `PulseSync.weekly_pulse_cycle` marks members as low engaged via tags and `summary_metrics` counts engagement.
 - Added court status toggling utilities with `court_toggle_demo.py`.
 - New demos cover SpinBoard, RecJamFeed, CSV helpers, and analytics snapshots.
+- `airtable_utils` keeps an in-memory table and can list records.
+- `SpinBoard` can export and load moments from Markdown.
 
 Scripts showcase:
 
@@ -26,6 +29,7 @@ Scripts showcase:
 - `pulse_reminder.py` – demonstrates a weekly pulse cycle with status output
 - `court_status.py` – updates the court grid and prints results
 - `spinboard_demo.py` – adds and lists SpinBoard moments
+- `spinboard_markdown_demo.py` – exports moments to Markdown
 - `recjam_demo.py` – shows a basic RecJam feed
 - `whirl_list_json.py` – exports and loads CRM data as JSON
 - `whirl_list_csv.py` – exports and loads CRM data as CSV
@@ -33,6 +37,7 @@ Scripts showcase:
 - `summary_metrics_demo.py` – prints engagement metrics
 - `email_demo.py` – shows tagging and email templates
 - `airtable_demo.py` – demonstrates Airtable helpers
+  with a simple in-memory record listing
 
 Example scripts live in the `scripts/` folder. Run them with `PYTHONPATH=. python scripts/<name>.py` to see sample output.
 Analytics snapshots (pulse metrics) can be generated in `analytics/`.
