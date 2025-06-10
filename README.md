@@ -11,6 +11,7 @@ be wired together in simple scripts to simulate RSVP and survey workflows.
 - `pulse_sync` – survey tracking helpers
 - `popup_rsvp` – basic RSVP webhook handler
 - `recjam_feed` – simple read-only feed model
+- `email_utils` – placeholder Mailchimp actions
 
 ## Recent additions
 - `WhirlList` now supports JSON and CSV import/export plus tag filtering.
@@ -29,6 +30,7 @@ Scripts showcase:
 - `whirl_list_csv.py` – exports and loads CRM data as CSV
 - `court_toggle_demo.py` – cycles court statuses in place
 - `summary_metrics_demo.py` – prints engagement metrics
+- `email_demo.py` – shows tagging and email templates
 
 Example scripts live in the `scripts/` folder. Run them with `PYTHONPATH=. python scripts/<name>.py` to see sample output.
 Analytics snapshots (pulse metrics) can be generated in `analytics/`.

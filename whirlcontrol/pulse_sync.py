@@ -6,6 +6,8 @@ Simulates weekly pulse survey interactions.
 from datetime import datetime
 from typing import Dict, Iterable
 
+from . import email_utils
+
 
 def record_pulse_response(whirl_list, email: str) -> None:
     """Update the WhirlList with last pulse timestamp."""
@@ -34,9 +36,8 @@ def process_weekly_pulse(whirl_list) -> Dict[str, str]:
 
 
 def send_pulse_emails(members: Iterable[str]) -> None:
-    """Placeholder for sending pulse survey emails."""
-    for email in members:
-        print(f"Sending pulse survey to {email}")
+    """Send a pulse survey email to each member."""
+    email_utils.send_bulk_template(members, "weekly_pulse")
 
 
 def weekly_pulse_cycle(whirl_list) -> Dict[str, str]:
@@ -47,8 +48,10 @@ def weekly_pulse_cycle(whirl_list) -> Dict[str, str]:
     for email, status in statuses.items():
         if status == "low_engaged":
             whirl_list.add_tag(email, "low_engaged")
+            email_utils.tag_mailchimp(email, "low_engaged")
         else:
             whirl_list.remove_tag(email, "low_engaged")
+            email_utils.tag_mailchimp(email, "active")
     return statuses
 
 

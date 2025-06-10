@@ -16,4 +16,5 @@ __all__ = [
     "pulse_sync",
     "popup_rsvp",
     "recjam_feed",
+    "email_utils",
 ]

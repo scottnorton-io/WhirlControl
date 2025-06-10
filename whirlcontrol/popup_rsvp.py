@@ -5,6 +5,8 @@ Placeholder functions for RSVP handling.
 
 from typing import Dict
 
+from . import email_utils
+
 
 def handle_rsvp(payload: Dict[str, str], whirl_list) -> None:
     """Process an RSVP payload and update WhirlList."""
@@ -18,7 +20,13 @@ def handle_rsvp(payload: Dict[str, str], whirl_list) -> None:
         if tier:
             initial_tags.append(f"tier_{tier}")
         whirl_list.add_member(name, email, tags=initial_tags)
+        for tag in initial_tags:
+            email_utils.tag_mailchimp(email, tag)
         if zip_code:
-            whirl_list.add_tag(email, f"zip_{zip_code}")
+            tag = f"zip_{zip_code}"
+            whirl_list.add_tag(email, tag)
+            email_utils.tag_mailchimp(email, tag)
         if court:
-            whirl_list.add_tag(email, f"court_{court}")
+            tag = f"court_{court}"
+            whirl_list.add_tag(email, tag)
+            email_utils.tag_mailchimp(email, tag)
