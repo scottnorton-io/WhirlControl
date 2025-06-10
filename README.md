@@ -4,6 +4,15 @@ Minimal prototype implementing modules described in the build spec.
 This version provides Python stubs representing core functionality. Modules can
 be wired together in simple scripts to simulate RSVP and survey workflows.
 
+## Quick Start
+1. Install dependencies if needed.
+2. Run the RSVP demo:
+```bash
+PYTHONPATH=. python scripts/rsvp_handler.py
+```
+This prints sample RSVP handling actions.
+
+
 ## Modules
 - `court_signal` – static representation of court status
 - `whirl_list` – in-memory CRM model
