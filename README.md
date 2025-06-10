@@ -23,6 +23,8 @@ be wired together in simple scripts to simulate RSVP and survey workflows.
 - `airtable_utils` keeps an in-memory table and can list or delete records.
 - `SpinBoard` can export and load moments from Markdown and JSON.
 - `RecJamFeed` now supports JSON export/import.
+- `RecJamFeed` can also export and import Markdown lists.
+- `court_signal` helpers serialize the grid to JSON.
 
 Scripts showcase:
 
@@ -34,8 +36,10 @@ Scripts showcase:
 - `spinboard_json_demo.py` – exports moments to JSON
 - `recjam_demo.py` – shows a basic RecJam feed
 - `recjam_json_demo.py` – exports feed items to JSON
+- `recjam_markdown_demo.py` – exports feed items to Markdown
 - `whirl_list_json.py` – exports and loads CRM data as JSON
 - `whirl_list_csv.py` – exports and loads CRM data as CSV
+- `court_grid_json_demo.py` – exports and loads court grid as JSON
 - `court_toggle_demo.py` – cycles court statuses in place
 - `summary_metrics_demo.py` – prints engagement metrics
 - `email_demo.py` – shows tagging and email templates

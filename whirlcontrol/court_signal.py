@@ -45,6 +45,27 @@ def list_to_grid(courts: List[Court]) -> Dict[str, CourtStatus]:
     return {c.label: c.status for c in courts}
 
 
+def grid_to_json(grid: Dict[str, CourtStatus]) -> str:
+    """Serialize the court grid to a JSON string."""
+    import json
+
+    return json.dumps({label: status.value for label, status in grid.items()})
+
+
+def grid_from_json(data: str) -> Dict[str, CourtStatus]:
+    """Recreate a court grid from a JSON string."""
+    import json
+
+    obj = json.loads(data)
+    grid: Dict[str, CourtStatus] = {}
+    for label, status_val in obj.items():
+        try:
+            grid[label] = CourtStatus(status_val)
+        except ValueError:
+            grid[label] = CourtStatus.OPEN
+    return grid
+
+
 def next_status(status: CourtStatus) -> CourtStatus:
     """Cycle to the next status in order OPEN -> SOFT_RSVP -> CAPACITY -> OPEN."""
     order = [CourtStatus.OPEN, CourtStatus.SOFT_RSVP, CourtStatus.CAPACITY]
