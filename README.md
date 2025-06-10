@@ -13,10 +13,10 @@ be wired together in simple scripts to simulate RSVP and survey workflows.
 - `recjam_feed` – simple read-only feed model
 
 ## Recent additions
-- `WhirlList` now supports JSON import/export and tag filtering.
-- `PulseSync.weekly_pulse_cycle` marks members as low engaged via tags.
-- Added `court_status.py` example script for court grid updates.
-- New demo scripts showcase SpinBoard, RecJamFeed, and JSON export helpers.
+- `WhirlList` now supports JSON and CSV import/export plus tag filtering.
+- `PulseSync.weekly_pulse_cycle` marks members as low engaged via tags and `summary_metrics` counts engagement.
+- Added court status toggling utilities with `court_toggle_demo.py`.
+- New demos cover SpinBoard, RecJamFeed, CSV helpers, and analytics snapshots.
 
 Scripts showcase:
 
@@ -26,6 +26,9 @@ Scripts showcase:
 - `spinboard_demo.py` – adds and lists SpinBoard moments
 - `recjam_demo.py` – shows a basic RecJam feed
 - `whirl_list_json.py` – exports and loads CRM data as JSON
+- `whirl_list_csv.py` – exports and loads CRM data as CSV
+- `court_toggle_demo.py` – cycles court statuses in place
+- `summary_metrics_demo.py` – prints engagement metrics
 
-Example scripts live in the `scripts/` folder. Run them with `PYTHONPATH=. python
-scripts/<name>.py` to see sample output.
+Example scripts live in the `scripts/` folder. Run them with `PYTHONPATH=. python scripts/<name>.py` to see sample output.
+Analytics snapshots (pulse metrics) can be generated in `analytics/`.

@@ -50,3 +50,12 @@ def weekly_pulse_cycle(whirl_list) -> Dict[str, str]:
         else:
             whirl_list.remove_tag(email, "low_engaged")
     return statuses
+
+
+def summary_metrics(whirl_list) -> Dict[str, int]:
+    """Return counts of active and low engaged members."""
+    statuses = process_weekly_pulse(whirl_list)
+    counts = {"active": 0, "low_engaged": 0, "unknown": 0}
+    for status in statuses.values():
+        counts[status] += 1
+    return counts

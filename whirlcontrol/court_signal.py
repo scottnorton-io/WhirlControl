@@ -43,3 +43,19 @@ def grid_to_list(grid: Dict[str, CourtStatus]) -> List[Court]:
 def list_to_grid(courts: List[Court]) -> Dict[str, CourtStatus]:
     """Convert a list of Court dataclasses back to a grid dict."""
     return {c.label: c.status for c in courts}
+
+
+def next_status(status: CourtStatus) -> CourtStatus:
+    """Cycle to the next status in order OPEN -> SOFT_RSVP -> CAPACITY -> OPEN."""
+    order = [CourtStatus.OPEN, CourtStatus.SOFT_RSVP, CourtStatus.CAPACITY]
+    try:
+        idx = order.index(status)
+        return order[(idx + 1) % len(order)]
+    except ValueError:
+        return CourtStatus.OPEN
+
+
+def toggle_court_status(grid: Dict[str, CourtStatus], court: str) -> None:
+    """Advance the status of a court in the grid using ``next_status``."""
+    if court in grid:
+        grid[court] = next_status(grid[court])
