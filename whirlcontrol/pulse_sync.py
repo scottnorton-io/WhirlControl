@@ -6,7 +6,7 @@ Simulates weekly pulse survey interactions.
 from datetime import datetime
 from typing import Dict, Iterable
 
-from . import email_utils
+from . import email_utils, airtable_utils
 
 
 def record_pulse_response(whirl_list, email: str) -> None:
@@ -49,9 +49,11 @@ def weekly_pulse_cycle(whirl_list) -> Dict[str, str]:
         if status == "low_engaged":
             whirl_list.add_tag(email, "low_engaged")
             email_utils.tag_mailchimp(email, "low_engaged")
+            airtable_utils.update_airtable_record(email, {"Engagement": "low"})
         else:
             whirl_list.remove_tag(email, "low_engaged")
             email_utils.tag_mailchimp(email, "active")
+            airtable_utils.update_airtable_record(email, {"Engagement": "active"})
     return statuses
 
 
