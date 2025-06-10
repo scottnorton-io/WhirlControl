@@ -33,6 +33,11 @@ class RecJamFeed:
             [{"title": item.title, "link": item.link} for item in self.items]
         )
 
+    def to_markdown(self) -> str:
+        """Return feed items formatted as a Markdown list."""
+        lines = [f"- [{item.title}]({item.link})" for item in self.items]
+        return "\n".join(lines)
+
     @classmethod
     def from_json(cls, data: str) -> "RecJamFeed":
         """Create a RecJamFeed from JSON string."""
@@ -44,4 +49,15 @@ class RecJamFeed:
                 obj.add_item(entry.get("title", ""), entry.get("link", ""))
         except Exception:
             pass
+        return obj
+
+    @classmethod
+    def from_markdown(cls, data: str) -> "RecJamFeed":
+        """Create a RecJamFeed from a Markdown bullet list."""
+        obj = cls()
+        for line in data.splitlines():
+            line = line.strip()
+            if line.startswith("- [") and "](" in line and line.endswith(")"):
+                title_part, link_part = line[3:-1].split("](", 1)
+                obj.add_item(title_part, link_part)
         return obj
